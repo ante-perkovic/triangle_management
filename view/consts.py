@@ -1,0 +1,1 @@
+DEFAULT_SCREEN_FONT = "Helvetica"
