@@ -17,6 +17,10 @@ def triangle_points_to_sides(triangle_points):
     return side1, side2, side3
 
 
+def perimeter(side1, side2, side3):
+    return side1 + side2 + side3
+
+
 def herons_area(side1, side2, side3):
     s = (side1 + side2 + side3) / 2  # Semi-perimeter
 

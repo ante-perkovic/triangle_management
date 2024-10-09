@@ -43,9 +43,12 @@ def validate_triangle_sides(validation_label, side1, side2, side3):
             display.display_triangle(canvas, triangle_points)
 
             # Add labels below the canvas
+            perimeter_label = tk.Label(
+                frame, text=f"Area: {calculation.perimeter(side1, side2, side3)}")
+            perimeter_label.pack(pady=10)
             area_label = tk.Label(
                 frame, text=f"Area: {calculation.herons_area(side1, side2, side3)}")
-            area_label.pack(pady=10)
+            area_label.pack(pady=5)
 
             type_sides_label = tk.Label(
                 frame, text=f"Type based on sides: {calculation.triangle_type_based_on_sides(side1, side2, side3)}")
@@ -103,6 +106,9 @@ def validate_triangle_angles(validation_label, angle1, angle2, angle3):
             notice_label = tk.Label(
                 frame, text="When provided with only angles, one side is size 200")
             notice_label.pack(pady=10)
+            perimeter_label = tk.Label(
+                frame, text=f"Area: {calculation.perimeter(triangle_sides[0], triangle_sides[1], triangle_sides[2])}")
+            perimeter_label.pack(pady=5)
             area_label = tk.Label(
                 frame, text=f"Area: {calculation.trigonometric_area(angle1, angle2, angle3, 'angles')}")
             area_label.pack(pady=5)
@@ -158,6 +164,9 @@ def validate_sides_and_angle(validation_label, side1, side2, angle):
                 triangle_points)
 
             # Add labels below the canvas
+            perimeter_label = tk.Label(
+                frame, text=f"Area: {calculation.perimeter(triangle_sides[0], triangle_sides[1], triangle_sides[2])}")
+            perimeter_label.pack(pady=10)
             area_label = tk.Label(
                 frame, text=f"Area: {calculation.trigonometric_area(side1, side2, angle, 'sides and angle')}")
             area_label.pack(pady=5)
