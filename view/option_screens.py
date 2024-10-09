@@ -107,7 +107,7 @@ def show_option3_screen(root):
 
     # Submit button
     submit_button = tk.Button(
-        root, text="Submit", command=lambda: validation.validate_sides_and_angle)
+        root, text="Submit", command=lambda: validation.validate_sides_and_angle(validation_label, side1_entry.get(), side2_entry.get(), angle_entry.get()))
     submit_button.pack(pady=10)
 
     # Back button

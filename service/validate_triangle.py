@@ -1,5 +1,9 @@
 
-from service import consts as consts
+from service import consts as service_consts
+from service import calculate_triangle as calculation
+import view.triangle_display as display
+from view import consts as view_consts
+import tkinter as tk
 
 
 def validate_triangle_sides(validation_label, side1, side2, side3):
@@ -18,9 +22,26 @@ def validate_triangle_sides(validation_label, side1, side2, side3):
                 text="Invalid input: Sides must be positive.", fg="red")
         else:
             validation_label.config(
-                text=consts.VALID_TRIANGLE_MESSAGE, fg="green")
+                text=service_consts.VALID_TRIANGLE_MESSAGE, fg="green")
+
+            # Create a new window for drawing the triangle
+            triangle_window = tk.Toplevel()
+            triangle_window.title("Triangle Drawing")
+            triangle_window.geometry("500x400")
+
+            # Create a canvas in the new window
+            canvas = tk.Canvas(triangle_window, width=500, height=400)
+            canvas.pack()
+
+            # Clear the canvas before drawing
+            canvas.delete('all')
+
+            triangle_points = calculation.calculate_triangle_from_sides(
+                view_consts.TRIANGLE_BASE_X, view_consts.TRIANGLE_BASE_Y, side1, side2, side3)
+            display.display_triangle(canvas, triangle_points)
     except ValueError:
-        validation_label.config(text=consts.INVALID_NUMBERS_MESSAGE, fg="red")
+        validation_label.config(
+            text=service_consts.INVALID_NUMBERS_MESSAGE, fg="red")
 
 
 def validate_triangle_angles(validation_label, angle1, angle2, angle3):
@@ -39,9 +60,10 @@ def validate_triangle_angles(validation_label, angle1, angle2, angle3):
                 text="Invalid triangle: Angles must be positive.", fg="red")
         else:
             validation_label.config(
-                text=consts.VALID_TRIANGLE_MESSAGE, fg="green")
+                text=service_consts.VALID_TRIANGLE_MESSAGE, fg="green")
     except ValueError:
-        validation_label.config(text=consts.INVALID_NUMBERS_MESSAGE, fg="red")
+        validation_label.config(
+            text=service_consts.INVALID_NUMBERS_MESSAGE, fg="red")
 
 
 def validate_sides_and_angle(validation_label, side1, side2, angle):
@@ -57,6 +79,7 @@ def validate_sides_and_angle(validation_label, side1, side2, angle):
                 text="Invalid input: Sides must be positive, and angle must be between 0 and 180 degrees.", fg="red")
         else:
             validation_label.config(
-                text=consts.VALID_TRIANGLE_MESSAGE, fg="green")
+                text=service_consts.VALID_TRIANGLE_MESSAGE, fg="green")
     except ValueError:
-        validation_label.config(text=consts.INVALID_NUMBERS_MESSAGE, fg="red")
+        validation_label.config(
+            text=service_consts.INVALID_NUMBERS_MESSAGE, fg="red")
