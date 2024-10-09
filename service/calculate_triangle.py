@@ -21,7 +21,7 @@ def triangle_points_to_sides(triangle_points):
 
 
 def perimeter(side1, side2, side3):
-    return side1 + side2 + side3
+    return round(side1 + side2 + side3, 2)
 
 # Calculate area size of triagle using Heron's formula
 
