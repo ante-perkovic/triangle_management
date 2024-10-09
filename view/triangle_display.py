@@ -20,4 +20,5 @@ def display_triangle(canvas, triangle_points):
     x3 = triangle_points[2][0]
     y3 = triangle_points[2][1]
 
+    # Render triangle on canvas
     canvas.create_polygon(x1, y1, x2, y2, x3, y3, fill='', outline='black')
