@@ -25,20 +25,35 @@ def validate_triangle_sides(validation_label, side1, side2, side3):
                 text=service_consts.VALID_TRIANGLE_MESSAGE, fg="green")
 
             # Create a new window for drawing the triangle
-            triangle_window = tk.Toplevel()
-            triangle_window.title("Triangle Drawing")
-            triangle_window.geometry("500x400")
+            triangle_window = display.create_triangle_window()
 
-            # Create a canvas in the new window
-            canvas = tk.Canvas(triangle_window, width=500, height=400)
-            canvas.pack()
+            frame = tk.Frame(triangle_window)
+            frame.pack(fill=tk.BOTH, expand=True)
+
+            # Create a canvas in the frame
+            canvas = tk.Canvas(frame, width=500, height=400, bg="white")
+            canvas.pack(pady=10)  # Add some padding for visibility
 
             # Clear the canvas before drawing
             canvas.delete('all')
 
+            # Calculate triangle points
             triangle_points = calculation.calculate_triangle_from_sides(
                 view_consts.TRIANGLE_BASE_X, view_consts.TRIANGLE_BASE_Y, side1, side2, side3)
             display.display_triangle(canvas, triangle_points)
+
+            # Add labels below the canvas
+            area_label = tk.Label(
+                frame, text=f"Area: {calculation.herons_area(side1, side2, side3)}")
+            area_label.pack(pady=10)
+
+            type_sides_label = tk.Label(
+                frame, text=f"Type based on sides: {calculation.triangle_type_based_on_sides(side1, side2, side3)}")
+            type_sides_label.pack(pady=5)
+
+            type_angles_label = tk.Label(
+                frame, text=f"Type based on angles: {calculation.triangle_type_based_on_angles(side1, side2, side3)}")
+            type_angles_label.pack(pady=5)
     except ValueError:
         validation_label.config(
             text=service_consts.INVALID_NUMBERS_MESSAGE, fg="red")
@@ -61,6 +76,45 @@ def validate_triangle_angles(validation_label, angle1, angle2, angle3):
         else:
             validation_label.config(
                 text=service_consts.VALID_TRIANGLE_MESSAGE, fg="green")
+
+            # Create a new window for drawing the triangle
+            triangle_window = display.create_triangle_window()
+
+            frame = tk.Frame(triangle_window)
+            frame.pack(fill=tk.BOTH, expand=True)
+
+            # Create a canvas in the frame
+            canvas = tk.Canvas(frame, width=500, height=400, bg="white")
+            canvas.pack(pady=10)  # Add some padding for visibility
+
+            # Clear the canvas before drawing
+            canvas.delete('all')
+
+            # Calculate triangle points
+            triangle_points = calculation.calculate_triangle_from_angles(
+                view_consts.TRIANGLE_BASE_X, view_consts.TRIANGLE_BASE_Y, angle1, angle2, angle3)
+            display.display_triangle(canvas, triangle_points)
+
+            # Calculate triangle sides from points
+            triangle_sides = calculation.triangle_points_to_sides(
+                triangle_points)
+
+            # Add labels below the canvas
+            notice_label = tk.Label(
+                frame, text="When provided with only angles, one side is size 200")
+            notice_label.pack(pady=10)
+            area_label = tk.Label(
+                frame, text=f"Area: {calculation.trigonometric_area(angle1, angle2, angle3, 'angles')}")
+            area_label.pack(pady=5)
+
+            type_sides_label = tk.Label(
+                frame, text=f"Type based on sides: {calculation.triangle_type_based_on_sides(triangle_sides[0], triangle_sides[1], triangle_sides[2])}")
+            type_sides_label.pack(pady=5)
+
+            type_angles_label = tk.Label(
+                frame, text=f"Type based on angles: {calculation.triangle_type_based_on_angles(triangle_sides[0], triangle_sides[1], triangle_sides[2])}")
+            type_angles_label.pack(pady=5)
+
     except ValueError:
         validation_label.config(
             text=service_consts.INVALID_NUMBERS_MESSAGE, fg="red")
@@ -80,6 +134,42 @@ def validate_sides_and_angle(validation_label, side1, side2, angle):
         else:
             validation_label.config(
                 text=service_consts.VALID_TRIANGLE_MESSAGE, fg="green")
+
+            # Create a new window for drawing the triangle
+            triangle_window = display.create_triangle_window()
+
+            frame = tk.Frame(triangle_window)
+            frame.pack(fill=tk.BOTH, expand=True)
+
+            # Create a canvas in the frame
+            canvas = tk.Canvas(frame, width=500, height=400, bg="white")
+            canvas.pack(pady=10)  # Add some padding for visibility
+
+            # Clear the canvas before drawing
+            canvas.delete('all')
+
+            # Calculate triangle points
+            triangle_points = calculation.calculate_triangle_from_sides_and_angle(
+                view_consts.TRIANGLE_BASE_X, view_consts.TRIANGLE_BASE_Y, side1, side2, angle)
+            display.display_triangle(canvas, triangle_points)
+
+            # Calculate triangle sides from points
+            triangle_sides = calculation.triangle_points_to_sides(
+                triangle_points)
+
+            # Add labels below the canvas
+            area_label = tk.Label(
+                frame, text=f"Area: {calculation.trigonometric_area(side1, side2, angle, 'sides and angle')}")
+            area_label.pack(pady=5)
+
+            type_sides_label = tk.Label(
+                frame, text=f"Type based on sides: {calculation.triangle_type_based_on_sides(triangle_sides[0], triangle_sides[1], triangle_sides[2])}")
+            type_sides_label.pack(pady=5)
+
+            type_angles_label = tk.Label(
+                frame, text=f"Type based on angles: {calculation.triangle_type_based_on_angles(triangle_sides[0], triangle_sides[1], triangle_sides[2])}")
+            type_angles_label.pack(pady=5)
+
     except ValueError:
         validation_label.config(
             text=service_consts.INVALID_NUMBERS_MESSAGE, fg="red")
