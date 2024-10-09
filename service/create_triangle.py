@@ -66,7 +66,7 @@ def create_triangle_from_sides(validation_label, name, side1, side2, side3, db: 
 
     # Add labels below the canvas
     perimeter_label = tk.Label(
-        frame, text=f"Area: {triangle_model.perimeter}")
+        frame, text=f"Perimeter: {triangle_model.perimeter}")
     perimeter_label.pack(pady=10)
     area_label = tk.Label(
         frame, text=f"Area: {triangle_model.area}")
@@ -146,7 +146,7 @@ def create_triangle_from_angles(validation_label, name, angle1, angle2, angle3, 
         frame, text="When provided with only angles, one side is size 200")
     notice_label.pack(pady=10)
     perimeter_label = tk.Label(
-        frame, text=f"Area: {triangle_model.perimeter}")
+        frame, text=f"Perimeter: {triangle_model.perimeter}")
     perimeter_label.pack(pady=10)
     area_label = tk.Label(
         frame, text=f"Area: {triangle_model.area}")
@@ -226,7 +226,7 @@ def create_triangle_from_sides_and_angles(validation_label, name, side1, side2, 
         frame, text="When provided with only angles, one side is size 200")
     notice_label.pack(pady=10)
     perimeter_label = tk.Label(
-        frame, text=f"Area: {triangle_model.perimeter}")
+        frame, text=f"Perimeter: {triangle_model.perimeter}")
     perimeter_label.pack(pady=10)
     area_label = tk.Label(
         frame, text=f"Area: {triangle_model.area}")
