@@ -1,5 +1,6 @@
 import math
 from service import consts
+from database import triangle
 
 
 def triangle_points_to_sides(triangle_points):
@@ -16,9 +17,13 @@ def triangle_points_to_sides(triangle_points):
 
     return side1, side2, side3
 
+# Calculate perimeter of the triangle
+
 
 def perimeter(side1, side2, side3):
     return side1 + side2 + side3
+
+# Calculate area size of triagle using Heron's formula
 
 
 def herons_area(side1, side2, side3):
@@ -26,6 +31,8 @@ def herons_area(side1, side2, side3):
 
     # Area formula
     return round(math.sqrt(s * (s - side1) * (s - side2) * (s - side3)), 2)
+
+# Calculate area size of triagle using trigonometry
 
 
 def trigonometric_area(a, b, c, input):
@@ -39,6 +46,8 @@ def trigonometric_area(a, b, c, input):
         side2 = b
 
     return round(0.5 * side1 * side2 * math.sin(math.radians(c)), 2)
+
+# Calculates points of triangle using sides
 
 
 def calculate_triangle_from_sides(base_x, base_y, side1, side2, side3):
@@ -58,6 +67,8 @@ def calculate_triangle_from_sides(base_x, base_y, side1, side2, side3):
 
     return [[x1, y1], [x2, y2], [x3, y3]]
 
+# Calculates points of triangle using sides and angle
+
 
 def calculate_triangle_from_sides_and_angle(base_x, base_y, side1, side2, angle):
     # Vertex 1 is at the origin (base_x, base_y)
@@ -71,6 +82,8 @@ def calculate_triangle_from_sides_and_angle(base_x, base_y, side1, side2, angle)
     y3 = base_y - side1 * math.sin(math.radians(angle))
 
     return [[x1, y1], [x2, y2], [x3, y3]]
+
+# Calculates points of triangle using angles
 
 
 def calculate_triangle_from_angles(base_x, base_y, angle1, angle2, angle3):
@@ -94,6 +107,8 @@ def calculate_triangle_from_angles(base_x, base_y, angle1, angle2, angle3):
 
     return [[x1, y1], [x2, y2], [x3, y3]]
 
+# Define triangle type based on sides
+
 
 def triangle_type_based_on_sides(side1, side2, side3):
     # Determine the type of triangle based on side lengths
@@ -103,6 +118,8 @@ def triangle_type_based_on_sides(side1, side2, side3):
         return "Isosceles"
     else:
         return "Scalene"
+
+# Define triangle type based on angles
 
 
 def triangle_type_based_on_angles(side1, side2, side3):
@@ -121,3 +138,19 @@ def triangle_type_based_on_angles(side1, side2, side3):
         return "Right"  # One angle is exactly 90°
     else:
         return "Obtuse"  # One angle is greater than 90°
+
+# Calculate triangle data using sides, returns Triangle object
+
+
+def calculate_triangle_data(name, triangle_points, triangle_sides):
+    perimeter_size = perimeter(
+        triangle_sides[0], triangle_sides[1], triangle_sides[2])
+    area_size = herons_area(
+        triangle_sides[0], triangle_sides[1], triangle_sides[2])
+    type_based_on_sides = triangle_type_based_on_sides(
+        triangle_sides[0], triangle_sides[1], triangle_sides[2])
+    type_based_on_angles = triangle_type_based_on_angles(
+        triangle_sides[0], triangle_sides[1], triangle_sides[2])
+
+    return triangle.Triangle(id=None,
+                             name=name, points=triangle_points, perimeter=perimeter_size, area=area_size, type_based_on_sides=type_based_on_sides, type_based_on_angles=type_based_on_angles)
